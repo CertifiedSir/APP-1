@@ -1,0 +1,119 @@
+import csv
+
+# Importer la fonction lire_csv depuis le fichier existant
+def lire_csv(nom_fichier):
+    """
+    Cette fonction ouvre un fichier CSV et renvoie les données contenues sous forme de liste de listes.
+
+    Paramètres:
+    nom_fichier (str): Le fichier CSV à lire.
+    
+    Retourne:
+    list: Une liste de listes contenant les données CSV.
+    """
+    with open(nom_fichier, newline='') as fichier_csv:
+        mon_csv = csv.reader(fichier_csv, delimiter=',')
+        mon_csv = list(mon_csv)
+
+    # Nettoyage des doublons et suppression des en-têtes
+    mon_csv_manipulable = []
+    for liste in mon_csv:
+        if liste not in mon_csv_manipulable:
+            mon_csv_manipulable.append(liste)
+
+    if ['', '', '', '', '', ''] in mon_csv_manipulable:
+        mon_csv_manipulable.remove(['', '', '', '', '', ''])
+
+    if ['Order ID', 'Product', 'Quantity Ordered', 'Price Each', 'Order Date', 'Purchase Address'] in mon_csv_manipulable:
+        mon_csv_manipulable.remove(['Order ID', 'Product', 'Quantity Ordered', 'Price Each', 'Order Date', 'Purchase Address'])
+
+    return mon_csv_manipulable
+
+# Sauvegarder les données mises à jour
+def sauvegarder_donnees(donnees):
+    with open("ventes_mises_a_jour.csv", "w") as f:
+        f.write("Order ID,Product,Quantity Ordered,Price Each,Order Date,Purchase Address\n")
+        for ligne in donnees:
+            f.write(",".join(ligne) + "\n")
+    print("Modifications enregistrées avec succès.")
+
+# Modifier une vente existante
+def modifier_vente(donnees):
+    order_id = input("Entrez l'ID de la commande à modifier : ")
+    for ligne in donnees:
+        if ligne[0] == order_id:
+            nouvelle_quantite = input("Nouvelle quantité (laisser vide pour ne pas modifier) : ")
+            nouveau_prix = input("Nouveau prix unitaire (laisser vide pour ne pas modifier) : ")
+            if nouvelle_quantite:
+                ligne[2] = nouvelle_quantite
+            if nouveau_prix:
+                ligne[3] = nouveau_prix
+            print("Modification réussie !")
+            return
+    print("Commande introuvable.")
+
+# Ajouter une nouvelle vente
+def ajouter_vente(donnees):
+    nouvelle_vente = [
+        input("Order ID : "),
+        input("Product : "),
+        input("Quantity Ordered : "),
+        input("Price Each : "),
+        input("Order Date : "),
+        input("Purchase Address : ")
+    ]
+    donnees.append(nouvelle_vente)
+    print("Nouvelle vente ajoutée !")
+
+# Filtrer les ventes par produit
+def produit_filtre(donnees, produit):
+    return [ligne for ligne in donnees if ligne[1] == produit]
+
+# Calculer le chiffre d'affaires total
+def chiffre_affaires(donnees, produit=None, date=None):
+    total = 0.0
+    for ligne in donnees:
+        prix = float(ligne[3])
+        quantite = int(ligne[2])
+        if (produit and ligne[1] == produit) or (date and ligne[4] == date) or (not produit and not date):
+            total += prix * quantite
+    return total
+
+# Interface utilisateur adaptée à lire_csv()
+def interface():
+    donnees = lire_csv("ventes.csv")  # Utilisation de la fonction `lire_csv`
+    while True:
+        print("\nOptions :")
+        print("1. Modifier une vente")
+        print("2. Ajouter une nouvelle vente")
+        print("3. Filtrer les ventes par produit")
+        print("4. Calculer le chiffre d'affaires")
+        print("5. Sauvegarder et quitter")
+
+        choix = input("Votre choix : ")
+
+        if choix == "1":
+            modifier_vente(donnees)
+        elif choix == "2":
+            ajouter_vente(donnees)
+        elif choix == "3":
+            produit = input("Entrez le nom du produit : ")
+            ventes_filtres = produit_filtre(donnees, produit)
+            print("Ventes filtrées pour", produit, ":")
+            for vente in ventes_filtres:
+                print(vente)
+        elif choix == "4":
+            produit = input("Entrez un produit (laisser vide pour tout) : ")
+            date = input("Entrez une date (laisser vide pour tout) : ")
+            produit = produit if produit else None
+            date = date if date else None
+            print(f"Chiffre d'affaires total : {chiffre_affaires(donnees, produit, date)}")
+        elif choix == "5":
+            sauvegarder_donnees(donnees)
+            print("Modifications enregistrées. Fin du programme.")
+            break
+        else:
+            print("Choix invalide, veuillez réessayer.")
+
+# Lancer l’interface utilisateur
+interface()
