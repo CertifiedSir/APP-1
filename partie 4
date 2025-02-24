@@ -1,0 +1,67 @@
+# Charger les données depuis un fichier CSV
+def charger_donnees():
+    donnees = []
+    with open("ventes.csv", "r") as f:
+        lignes = f.readlines()
+        for ligne in lignes[1:]:
+            donnees.append(ligne.strip().split(","))
+    return donnees
+
+# Fonction pour calculer le chiffre d'affaires total pour un produit ou une période donnée
+def chiffre_affaires(donnees, produit=None, date=None):
+    total = 0.0
+    for ligne in donnees:
+        prix = float(ligne[3])
+        quantite = int(ligne[2])
+        if (produit and ligne[1] == produit) or (date and ligne[4] == date) or (not produit and not date):
+            total += prix * quantite
+    return total
+
+# Fonction pour trouver la date avec le plus grand chiffre d'affaires
+def date_max_ventes(donnees):
+    ventes_par_date = {}
+    for ligne in donnees:
+        date = ligne[4]
+        prix = float(ligne[3]) * int(ligne[2])
+        ventes_par_date[date] = ventes_par_date.get(date, 0) + prix
+    return max(ventes_par_date, key=ventes_par_date.get)
+
+# Fonction pour trier les produits en fonction du chiffre d'affaires
+def trier_produits_par_ventes(donnees):
+    ventes_par_produit = {}
+    for ligne in donnees:
+        produit = ligne[1]
+        prix = float(ligne[3]) * int(ligne[2])
+        ventes_par_produit[produit] = ventes_par_produit.get(produit, 0) + prix
+    return sorted(ventes_par_produit.items(), key=lambda x: x[1], reverse=True)
+
+# Interface pour afficher les statistiques
+def interface_statistiques():
+    donnees = charger_donnees()
+    
+    print("\n1. Calculer le chiffre d'affaires total")
+    print("2. Trouver la date avec les ventes les plus élevées")
+    print("3. Trier les produits en fonction des ventes")
+    choix = input("Votre choix : ")
+
+    if choix == "1":
+        produit = input("Entrez le produit (laisser vide pour tout) : ")
+        date = input("Entrez la date (laisser vide pour tout) : ")
+        produit = produit if produit else None
+        date = date if date else None
+        print(f"Chiffre d'affaires total : {chiffre_affaires(donnees, produit, date)}")
+
+    elif choix == "2":
+        print(f"La date avec les ventes les plus élevées est : {date_max_ventes(donnees)}")
+
+    elif choix == "3":
+        produits_tries = trier_produits_par_ventes(donnees)
+        print("Produits triés par chiffre d'affaires :")
+        for produit, vente in produits_tries:
+            print(f"{produit} : {vente}")
+
+    else:
+        print("Choix invalide.")
+
+# Lancer l'interface de statistiques
+interface_statistiques()
