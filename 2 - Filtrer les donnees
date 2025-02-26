@@ -171,5 +171,10 @@ def affaires_date(csv_manip, date):
     #me debarrasser des dates non attendus
     liste_filtree = date_filtre(csv_manip, date)
 
-    #faire un pair quantite / prix dans une liste
-    
+    #variable qui accumule chiffre d'affaire de chaque vente
+    chiffre_affaire = 0
+
+    for ligne in liste_filtree:
+        chiffre_affaire += ligne[2]*ligne[3]
+
+    return chiffre_affaire
