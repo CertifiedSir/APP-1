@@ -136,29 +136,29 @@ def quantmax_filtre(csv_manip, quantite):
 
 def produit_vendu(csv_manip):
 
-"""
-Cette fonction renvoie le produit le plus vendu, dans mon csv.
-Elle prend en compte de la quantite vendu et du prix unitaire.
-"""
-
-#preparer mon dico
-dico_produit = {}
-
-for ligne in csv_manip:
-
-    if ligne[1] not in dico_produit.keys():
-        dico_produit[ligne[1]] = [ligne[2], ligne[3]]
-    else:
-        dico_produit[ligne[1]][0] += ligne[2]
-
-#preparer la liste des prix vendu pour chaque produit
-liste_maxi = []
-
-for pair in dico_produit.values():
-    liste_maxi.append(pair[0]*pair[1])
-
-#renvoyer le maximum des prix
-return max(liste_maxi)
+    """
+    Cette fonction renvoie le produit le plus vendu, dans mon csv.
+    Elle prend en compte de la quantite vendu et du prix unitaire.
+    """
+    
+    #preparer mon dico
+    dico_produit = {}
+    
+    for ligne in csv_manip:
+    
+        if ligne[1] not in dico_produit.keys():
+            dico_produit[ligne[1]] = [ligne[2], ligne[3]]
+        else:
+            dico_produit[ligne[1]][0] += ligne[2]
+    
+    #preparer la liste des prix vendu pour chaque produit
+    liste_maxi = []
+    
+    for pair in dico_produit.values():
+        liste_maxi.append(pair[0]*pair[1])
+    
+    #renvoyer le maximum des prix
+    return max(liste_maxi)
 
 
 
