@@ -1,5 +1,10 @@
 # Tache 2: Les fonctions pour trier / filtrer les donnees
 
+
+
+
+
+
 def produit_filtre(csv_manip, produit):
     """
     Cette fonction cree une liste de liste uniquement avec un produit specifique.
@@ -20,6 +25,11 @@ def produit_filtre(csv_manip, produit):
 
     return csv_produit
 
+
+
+
+
+
 def date_filtre(csv_manip, date):
     """
     Cette fonction cree une liste de liste uniquement avec une date specifique.
@@ -39,6 +49,11 @@ def date_filtre(csv_manip, date):
             csv_date.append(ligne)
 
     return csv_date
+
+
+
+
+
 
 def prix_filtre(csv_manip, prix):
     
@@ -61,6 +76,12 @@ def prix_filtre(csv_manip, prix):
 
     return csv_prix
 
+
+
+
+
+
+
 def quantmin_filtre(csv_manip, quantite):
     """
     Cette fonction cree une liste de liste avec un quantite minimum specifique.
@@ -80,9 +101,15 @@ def quantmin_filtre(csv_manip, quantite):
 
     return csv_quantmin
 
+
+
+
+
+
+
 def quantmax_filtre(csv_manip, quantite):
     """
-    Cette fonction cree une liste de liste avec un quantite minimum specifique.
+    Cette fonction cree une liste de liste avec un quantite maximum specifique.
 
     Parametres:
     csv_manip(list): liste de liste du csv que je veux trier.
@@ -98,3 +125,51 @@ def quantmax_filtre(csv_manip, quantite):
             csv_quantmax.append(ligne)
 
     return csv_quantmax
+
+
+
+
+
+
+
+#fonction produit le plus vendu
+
+def produit_vendu(csv_manip):
+
+"""
+Cette fonction renvoie le produit le plus vendu, dans mon csv.
+Elle prend en compte de la quantite vendu et du prix unitaire.
+"""
+
+#preparer mon dico
+dico_produit = {}
+
+for ligne in csv_manip:
+
+    if ligne[1] not in dico_produit.keys():
+        dico_produit[ligne[1]] = [ligne[2], ligne[3]]
+    else:
+        dico_produit[ligne[1]][0] += ligne[2]
+
+#preparer la liste des prix vendu pour chaque produit
+liste_maxi = []
+
+for pair in dico_produit.values():
+    liste_maxi.append(pair[0]*pair[1])
+
+#renvoyer le maximum des prix
+return max(liste_maxi)
+
+
+
+
+
+
+
+def affaires_date(csv_manip, date):
+
+    #me debarrasser des dates non attendus
+    liste_filtree = date_filtre(csv_manip, date)
+
+    #faire un pair quantite / prix dans une liste
+    
