@@ -147,9 +147,9 @@ def produit_vendu(csv_manip):
     for ligne in csv_manip:
     
         if ligne[1] not in dico_produit.keys():
-            dico_produit[ligne[1]] = [ligne[2], ligne[3]]
+            dico_produit[ligne[1]] = [int(ligne[2]), float(ligne[3])]
         else:
-            dico_produit[ligne[1]][0] += ligne[2]
+            dico_produit[ligne[1]][0] += int(ligne[2])
     
     #preparer la liste des prix vendu pour chaque produit
     liste_maxi = []
@@ -175,6 +175,6 @@ def affaires_date(csv_manip, date):
     chiffre_affaire = 0
 
     for ligne in liste_filtree:
-        chiffre_affaire += ligne[2]*ligne[3]
+        chiffre_affaire += int(ligne[2])*float(ligne[3]) #ajouter prix * quantity
 
     return chiffre_affaire
