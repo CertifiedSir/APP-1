@@ -180,7 +180,7 @@ def interface_filtrage(csv_manip):
         print("\nAutres options:")
         print("6. Calculer le produit le plus vendu")
         print("7. calculer le chiffre d'affaire du jour J")
-        print("8. Finir et sortir de l'interface. (Les filtrages ne seront sauvegardes...)")
+        print("8. Finir et sortir de l'interface. (Les filtrages ne seront sauvegardes...)\n")
 
         choix = input("Votre choix: ")
 
@@ -224,7 +224,7 @@ def interface_filtrage(csv_manip):
 
         elif choix =="7":
             date = input("Entrer la date: ")
-            print(f"dans ces conditions de filtre... Ce jour, L'ecole a gagne{affaires_date(copie_csv, date)} !")
+            print(f"dans ces conditions de filtre... Ce jour, L'ecole a gagne: {affaires_date(copie_csv, date)} !")
 
         elif choix == "8":
             print("On va revenir sur l'interface d'accueil...")
