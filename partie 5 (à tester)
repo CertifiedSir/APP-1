@@ -12,7 +12,7 @@ def chiffre_affaires(donnees, produit=None, date=None):
 
 # Interface utilisateur adaptée à lire_csv()
 def interface():
-    donnees = lire_csv("ventes.csv")  # Utilisation de la fonction `lire_csv`
+    donnees = lire_csv(input("Nom du fichier .csv: "))  # Utilisation de la fonction `lire_csv`
     while True:
         print("\nOptions :")
         print("1. Modifier une vente")
