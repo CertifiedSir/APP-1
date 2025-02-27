@@ -65,5 +65,4 @@ def interface_statistiques(donnees):
     else:
         print("Choix invalide.")
 
-# Lancer l'interface de statistiques
-interface_statistiques()
+
