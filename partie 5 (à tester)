@@ -22,11 +22,7 @@ def interface():
             ajouter_vente(donnees)
 
         elif choix == "3":
-            produit = input("Entrez le nom du produit : ")
-            ventes_filtres = produit_filtre(donnees, produit)
-            print("Ventes filtrées pour", produit, ":")
-            for vente in ventes_filtres:
-                print(vente)
+            interface_filtrage(donnees)
 
         elif choix == "4":
             interface_statistiques(donnees)
