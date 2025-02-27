@@ -1,12 +1,3 @@
-# Charger les données depuis un fichier CSV
-def charger_donnees():
-    donnees = []
-    with open("ventes.csv", "r") as f:
-        lignes = f.readlines()
-        for ligne in lignes[1:]:
-            donnees.append(ligne.strip().split(","))
-    return donnees
-
 # Fonction pour calculer le chiffre d'affaires total pour un produit ou une période donnée
 def chiffre_affaires(donnees, produit=None, date=None):
     total = 0.0
