@@ -158,7 +158,7 @@ def produit_vendu(csv_manip):
         liste_maxi.append(pair[0]*pair[1])
     
     #renvoyer le maximum des prix
-    return max(liste_maxi)
+    return tuple(dico_produit.keys())[liste_maxi.index(max(liste_maxi))], max(liste_maxi)
 
 
 
@@ -178,3 +178,4 @@ def affaires_date(csv_manip, date):
         chiffre_affaire += int(ligne[2])*float(ligne[3]) #ajouter prix * quantity
 
     return chiffre_affaire
+
