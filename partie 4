@@ -8,6 +8,10 @@ def chiffre_affaires(donnees, produit=None, date=None):
             total += prix * quantite
     return total
 
+
+
+
+
 # Fonction pour trouver la date avec le plus grand chiffre d'affaires
 def date_max_ventes(donnees):
     ventes_par_date = {}
@@ -17,6 +21,10 @@ def date_max_ventes(donnees):
         ventes_par_date[date] = ventes_par_date.get(date, 0) + prix
     return max(ventes_par_date, key=ventes_par_date.get)
 
+
+
+
+
 # Fonction pour trier les produits en fonction du chiffre d'affaires
 def trier_produits_par_ventes(donnees):
     ventes_par_produit = {}
@@ -25,6 +33,10 @@ def trier_produits_par_ventes(donnees):
         prix = float(ligne[3]) * int(ligne[2])
         ventes_par_produit[produit] = ventes_par_produit.get(produit, 0) + prix
     return sorted(ventes_par_produit.items(), key=lambda x: x[1], reverse=True)
+
+
+
+
 
 # Interface pour afficher les statistiques
 def interface_statistiques():
