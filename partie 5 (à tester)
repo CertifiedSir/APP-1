@@ -29,7 +29,7 @@ def interface():
                 print(vente)
 
         elif choix == "4":
-            interfaces_statistiques(donnees)
+            interface_statistiques(donnees)
 
         elif choix == "5":
             sauvegarder_donnees(donnees)
