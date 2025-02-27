@@ -39,8 +39,7 @@ def trier_produits_par_ventes(donnees):
 
 
 # Interface pour afficher les statistiques
-def interface_statistiques():
-    donnees = charger_donnees()
+def interface_statistiques(donnees):
     
     print("\n1. Calculer le chiffre d'affaires total")
     print("2. Trouver la date avec les ventes les plus élevées")
