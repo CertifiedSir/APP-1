@@ -155,6 +155,9 @@ def affaires_date(csv_manip, date):
     return chiffre_affaire
 
 
+
+
+
 def interface_filtrage(csv_manip):
     """
     Cette fonction ouvre une interface qui relie les fonctions de filtrage. Appeler seulement en fonction des choix effectues dans la fonction interface()
@@ -165,7 +168,7 @@ def interface_filtrage(csv_manip):
     copie_csv = csv_manip
 
     #Debut de l'interface.
-    print("Bienvenue a l'interface de filtrage. Selectionner les options:")
+    print("Bienvenue a l'interface de filtrage. Selectionner les options:\n")
     while Ouverture == True:
 
         
@@ -174,7 +177,7 @@ def interface_filtrage(csv_manip):
         print("3. Filtrer par prix")
         print("4. Filtrer par quantite de la vente minimum")
         print("5. Filtrer par quantite de la vente maximum")
-        print("\nAutres options")
+        print("\nAutres options:")
         print("6. Calculer le produit le plus vendu")
         print("7. calculer le chiffre d'affaire du jour J")
         print("8. Finir et sortir de l'interface. (Les filtrages ne seront sauvegardes...)")
@@ -217,17 +220,16 @@ def interface_filtrage(csv_manip):
                 print(vente)
 
         elif choix =="6":
-            print(f"Le produit le plus vendu dans ces conditions de filtre est: {produit_vendu(copie_csv} (chiffre d'affaire, vente)")
+            print(f"Le produit le plus vendu dans ces conditions de filtre est: {produit_vendu(copie_csv)} (chiffre d'affaire, vente)")
 
         elif choix =="7":
             date = input("Entrer la date: ")
-            print(f"dans ces conditions de filtre... Ce jour, L'ecole a gagne{affaires_date(copie_csv)} !")
+            print(f"dans ces conditions de filtre... Ce jour, L'ecole a gagne{affaires_date(copie_csv, date)} !")
 
         elif choix == "8":
             print("On va revenir sur l'interface d'accueil...")
             Ouverture = False
             break
         else:
-            print("Choisis un entier entre 1 et 8, ya hmar.")
-
-        print("Tu peux encore plus filtrer par...")
+            print("Choisis un entier entre 1 et 8, ya hmar.\n")
+        print("\nTu peux encore plus filtrer par...\n")
