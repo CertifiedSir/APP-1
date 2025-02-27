@@ -1,12 +1,5 @@
 # Charger les données depuis un fichier CSV
-def charger_donnees():
-    donnees = []
-    f = open("ventes.csv", "r")
-    lignes = f.readlines()
-    f.close()
-    for ligne in lignes[1:]:
-        donnees.append(ligne.strip().split(","))
-    return donnees
+
 
 def sauvegarder_donnees(donnees):
     f = open("ventes_mises_a_jour.csv", "w")
@@ -14,6 +7,10 @@ def sauvegarder_donnees(donnees):
     for ligne in donnees:
         f.write(",".join(ligne) + "\n")
     f.close()
+
+
+
+
 
 def modifier_vente(donnees):
     order_id = input("Entrez l'ID de la commande à modifier : ")
@@ -29,6 +26,10 @@ def modifier_vente(donnees):
             return
     print("Commande introuvable.")
 
+
+
+
+
 def ajouter_vente(donnees):
     nouvelle_vente = [
         input("Order ID : "),
@@ -40,6 +41,10 @@ def ajouter_vente(donnees):
     ]
     donnees.append(nouvelle_vente)
     print("Nouvelle vente ajoutée !")
+
+
+
+
 
 def interface():
     donnees = charger_donnees()
@@ -59,5 +64,8 @@ def interface():
             break
         else:
             print("Choix invalide, veuillez réessayer.")
+
+
+
 
 interface()
