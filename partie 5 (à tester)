@@ -1,18 +1,10 @@
 
+# Interface utilisateur
 
-# Calculer le chiffre d'affaires total
-def chiffre_affaires(donnees, produit=None, date=None):
-    total = 0.0
-    for ligne in donnees:
-        prix = float(ligne[3])
-        quantite = int(ligne[2])
-        if (produit and ligne[1] == produit) or (date and ligne[4] == date) or (not produit and not date):
-            total += prix * quantite
-    return total
-
-# Interface utilisateur adaptée à lire_csv()
 def interface():
+
     donnees = lire_csv(input("Nom du fichier .csv / Entrez ventes_mises_a_jour.csv pour suivre votre progres. "))  # Utilisation de la fonction `lire_csv`
+
     while True:
         print("\nOptions :")
         print("1. Modifier une vente")
@@ -25,20 +17,20 @@ def interface():
 
         if choix == "1":
             modifier_vente(donnees)
+
         elif choix == "2":
             ajouter_vente(donnees)
+
         elif choix == "3":
             produit = input("Entrez le nom du produit : ")
             ventes_filtres = produit_filtre(donnees, produit)
             print("Ventes filtrées pour", produit, ":")
             for vente in ventes_filtres:
                 print(vente)
+
         elif choix == "4":
-            produit = input("Entrez un produit (laisser vide pour tout) : ")
-            date = input("Entrez une date (laisser vide pour tout) : ")
-            produit = produit if produit else None
-            date = date if date else None
-            print(f"Chiffre d'affaires total : {chiffre_affaires(donnees, produit, date)}")
+            interfaces_graphiques()
+
         elif choix == "5":
             sauvegarder_donnees(donnees)
             print("Modifications enregistrées. Fin du programme.")
