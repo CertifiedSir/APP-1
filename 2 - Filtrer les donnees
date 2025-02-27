@@ -154,3 +154,80 @@ def affaires_date(csv_manip, date):
 
     return chiffre_affaire
 
+
+def interface_filtrage(csv_manip):
+    """
+    Cette fonction ouvre une interface qui relie les fonctions de filtrage. Appeler seulement en fonction des choix effectues dans la fonction interface()
+    """
+
+    #definir l'etat d'ouverture d'interface, la feuille ou on va jouer les filtrages
+    Ouverture = True
+    copie_csv = csv_manip
+
+    #Debut de l'interface.
+    print("Bienvenue a l'interface de filtrage. Selectionner les options:")
+    while Ouverture == True:
+
+        
+        print("1. Filtrer par produit")
+        print("2. Filtrer par date")
+        print("3. Filtrer par prix")
+        print("4. Filtrer par quantite de la vente minimum")
+        print("5. Filtrer par quantite de la vente maximum")
+        print("\nAutres options")
+        print("6. Calculer le produit le plus vendu")
+        print("7. calculer le chiffre d'affaire du jour J")
+        print("8. Finir et sortir de l'interface. (Les filtrages ne seront sauvegardes...)")
+
+        choix = input("Votre choix: ")
+
+        if choix == "1":
+            produit = input("Entrez le nom du produit : ")
+            copie_csv = produit_filtre(copie_csv, produit)
+            print(f"Ventes filtrées pour {produit}: ")
+            for vente in copie_csv:
+                print(vente)
+                
+        elif choix =="2":
+            date = input("Entrez la date jj/mm/19 heure:min : ")
+            copie_csv = date_filtre(copie_csv, date)
+            print(f"Ventes filtrées pour {date}: ")
+            for vente in copie_csv:
+                print(vente)
+
+        elif choix =="3":
+            prix = float(input("Entrez le prix unitaire du produit : "))
+            copie_csv = prix_filtre(copie_csv, prix)
+            print(f"Ventes filtrées pour {prix}: ")
+            for vente in copie_csv:
+                print(vente)
+
+        elif choix =="4":
+            qtt = int(input("Entrez la qtt. minimum : "))
+            copie_csv = quantmin_filtre(copie_csv, qtt)
+            print(f"Ventes filtrées pour {qtt}: ")
+            for vente in copie_csv:
+                print(vente)
+                
+        elif choix =="5":
+            qtt = int(input("Entrez la qtt. maximum : "))
+            copie_csv = quantmax_filtre(copie_csv, qtt)
+            print(f"Ventes filtrées pour {qtt}: ")
+            for vente in copie_csv:
+                print(vente)
+
+        elif choix =="6":
+            print(f"Le produit le plus vendu dans ces conditions de filtre est: {produit_vendu(copie_csv} (chiffre d'affaire, vente)")
+
+        elif choix =="7":
+            date = input("Entrer la date: ")
+            print(f"dans ces conditions de filtre... Ce jour, L'ecole a gagne{affaires_date(copie_csv)} !")
+
+        elif choix == "8":
+            print("On va revenir sur l'interface d'accueil...")
+            Ouverture = False
+            break
+        else:
+            print("Choisis un entier entre 1 et 8, ya hmar.")
+
+        print("Tu peux encore plus filtrer par...")
