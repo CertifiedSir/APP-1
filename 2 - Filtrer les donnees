@@ -133,6 +133,7 @@ def produit_vendu(csv_manip):
         liste_maxi.append(pair[0]*pair[1])
     
     #renvoyer le maximum des prix
+    
     return tuple(dico_produit.keys())[liste_maxi.index(max(liste_maxi))], max(liste_maxi)
 
 
